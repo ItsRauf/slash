@@ -4,9 +4,12 @@
     "build": "snowpack build",
     "test": "web-test-runner \"src/**/*.test.tsx\"",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
-    "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\""
+    "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\"",
+    "predeploy": "npm run build && touch build/.nojekyll",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.3.0",
     "antd": "^4.10.1",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",

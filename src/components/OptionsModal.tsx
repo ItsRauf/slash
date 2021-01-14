@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { commandState, optionElementState } from '../recoil';
 
 import { ApplicationCommandOptionType } from '../slash/ApplicationCommand';
+import Icons from '../icons';
 import Option from './options/Option';
 import keyofEnum from '../helpers/keyofEnum';
 import { useRecoilState } from 'recoil';
@@ -72,8 +73,12 @@ function OptionsModal() {
                     ]
                   }
                   onClick={addOptionElement}
+                  size="large"
                 >
-                  {val}
+                  <Row gutter={8} align="middle" justify="space-around">
+                    <Col>{Icons[val]}</Col>
+                    <Col>{val}</Col>
+                  </Row>
                 </Button>
               </Col>
             ))}
@@ -89,8 +94,12 @@ function OptionsModal() {
                     ]
                   }
                   onClick={addOptionElement}
+                  size="large"
                 >
-                  {val}
+                  <Row gutter={8} align="middle" justify="space-around">
+                    <Col>{Icons[val]}</Col>
+                    <Col>{val}</Col>
+                  </Row>
                 </Button>
               </Col>
             ))}

@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { commandState, optionElementState } from '../../recoil';
 
 import GenericInput from './GenericInput';
+import Icons from '../../icons';
 import { useRecoilState } from 'recoil';
 
 interface OptionProps {
@@ -19,6 +20,8 @@ function Option({ type, index }: OptionProps) {
     type,
     name: '',
     description: '',
+    default: false,
+    required: false,
   });
   const [command, setCommand] = useRecoilState(commandState);
   useEffect(() => {
@@ -59,7 +62,17 @@ function Option({ type, index }: OptionProps) {
   }
 
   return (
-    <Card title={ApplicationCommandOptionType[type]} bordered={false}>
+    <Card
+      title={
+        <>
+          <Row gutter={16} align="middle" justify="start">
+            <Col>{Icons[ApplicationCommandOptionType[type]]}</Col>
+            <Col>{ApplicationCommandOptionType[type]}</Col>
+          </Row>
+        </>
+      }
+      bordered={false}
+    >
       <Space direction="vertical" style={{ width: '100%' }}>
         <GenericInput name="name" setter={[option, setOption]} />
         <GenericInput name="description" setter={[option, setOption]} />

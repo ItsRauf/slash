@@ -22,6 +22,7 @@ module.exports = {
   },
   buildOptions: {
     /* ... */
+    baseUrl: '/slash',
   },
   proxy: {
     /* ... */
