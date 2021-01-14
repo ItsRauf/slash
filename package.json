@@ -6,7 +6,7 @@
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\"",
     "predeploy": "npm run build && touch build/.nojekyll",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build -r https://github.com/ItsRauf/slash.git"
   },
   "dependencies": {
     "@ant-design/icons": "^4.3.0",
