@@ -4,8 +4,19 @@ import App from './App';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { RecoilRoot } from 'recoil';
+// import { ThemeSwitcherProvider } from 'react-css-theme-switcher';
+
+async function _themeLoad() {
+  await import('antd/dist/antd.css');
+  await import('antd/dist/antd.dark.css');
+}
 
 //import './index.css';
+
+const themes = {
+  light: '%PUBLIC_URL%web_modules/antd/dist/antd.css',
+  dark: '%PUBLIC_URL%web_modules/antd/dist/antd.dark.css',
+};
 
 ReactDOM.render(
   <React.StrictMode>

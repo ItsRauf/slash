@@ -9,10 +9,15 @@ import React from 'react';
 import ValueInput from './components/ValueInput';
 import { useRecoilValue } from 'recoil';
 
+
 function Heading() {
   return (
     <Layout.Header>
-      <h2>Rauf's Slash Command Generator</h2>
+      <>
+        <h2>
+          Rauf's Slash Command Generator
+        </h2>
+      </>
     </Layout.Header>
   );
 }

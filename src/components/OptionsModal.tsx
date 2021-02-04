@@ -5,6 +5,8 @@ import { commandState, optionElementState } from '../recoil';
 import { ApplicationCommandOptionType } from '../slash/ApplicationCommand';
 import Icons from '../icons';
 import Option from './options/Option';
+import SubCommand from './options/SubCommand';
+import SubCommandGroup from './options/SubCommandGroup';
 import keyofEnum from '../helpers/keyofEnum';
 import { useRecoilState } from 'recoil';
 
@@ -25,16 +27,49 @@ function OptionsModal() {
   const [command, setCommand] = useRecoilState(commandState);
   function addOptionElement(e: React.MouseEvent<HTMLElement, MouseEvent>) {
     const ts = Date.now();
-    setOptionElements([
-      ...optionElements,
-      <Option
-        key={`${
-          ApplicationCommandOptionType[parseInt(e.currentTarget.id)]
-        }Option-${ts}`}
-        type={parseInt(e.currentTarget.id)}
-        index={ts}
-      />,
-    ]);
+    const optionType = parseInt(e.currentTarget.id);
+    switch (optionType) {
+      case ApplicationCommandOptionType.SubCommand:
+        setOptionElements([
+          ...optionElements,
+          <SubCommand
+            key={`${
+              ApplicationCommandOptionType[parseInt(e.currentTarget.id)]
+            }Option-${ts}`}
+            type={parseInt(e.currentTarget.id)}
+            index={ts}
+            inGroup={false}
+          />,
+        ]);
+        break;
+
+      case ApplicationCommandOptionType.SubCommandGroup:
+        setOptionElements([
+          ...optionElements,
+          <SubCommandGroup
+            key={`${
+              ApplicationCommandOptionType[parseInt(e.currentTarget.id)]
+            }Option-${ts}`}
+            type={parseInt(e.currentTarget.id)}
+            index={ts}
+            inGroup={false}
+          />,
+        ]);
+        break;
+
+      default:
+        setOptionElements([
+          ...optionElements,
+          <Option
+            key={`${
+              ApplicationCommandOptionType[parseInt(e.currentTarget.id)]
+            }Option-${ts}`}
+            type={parseInt(e.currentTarget.id)}
+            index={ts}
+          />,
+        ]);
+        break;
+    }
     if (!command.options) {
       setCommand({ ...command, options: [] });
     }
@@ -42,6 +77,7 @@ function OptionsModal() {
   }
 
   const OptionNames = keyofEnum(ApplicationCommandOptionType);
+  const SubCommandOptions = OptionNames.splice(0, 2);
 
   return (
     <>
@@ -63,8 +99,8 @@ function OptionsModal() {
       >
         <Space size={24} direction="vertical" style={{ width: '100%' }}>
           <Row gutter={16} justify="space-around" align="middle">
-            {OptionNames.splice(0, 3).map((val) => (
-              <Col flex="auto">
+            {OptionNames.splice(0, 3).map((val, ind) => (
+              <Col flex="auto" key={ind}>
                 <Button
                   key={val}
                   id={
@@ -84,8 +120,29 @@ function OptionsModal() {
             ))}
           </Row>
           <Row gutter={16} justify="space-around" align="middle">
-            {OptionNames.splice(-3).map((val) => (
-              <Col flex="auto">
+            {OptionNames.splice(-3).map((val, ind) => (
+              <Col flex="auto" key={ind}>
+                <Button
+                  key={val}
+                  id={
+                    ApplicationCommandOptionType[
+                      (val as unknown) as ApplicationCommandOptionType
+                    ]
+                  }
+                  onClick={addOptionElement}
+                  size="large"
+                >
+                  <Row gutter={8} align="middle" justify="space-around">
+                    <Col>{Icons[val]}</Col>
+                    <Col>{val}</Col>
+                  </Row>
+                </Button>
+              </Col>
+            ))}
+          </Row>
+          <Row gutter={16} justify="space-around" align="middle">
+            {SubCommandOptions.map((val, ind) => (
+              <Col flex="auto" key={ind}>
                 <Button
                   key={val}
                   id={

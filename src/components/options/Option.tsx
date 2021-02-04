@@ -13,8 +13,20 @@ import { useRecoilState } from 'recoil';
 interface OptionProps {
   type: ApplicationCommandOptionType;
   index: number;
+  inSubCommand?: boolean;
+  offset?: string;
+  deleter?: (key: string) => void;
+  updater?: (val: ApplicationCommandOption) => void;
+  className?: string;
 }
-function Option({ type, index }: OptionProps) {
+function Option({
+  type,
+  index,
+  inSubCommand,
+  offset,
+  deleter,
+  updater,
+}: OptionProps) {
   const [option, setOption] = useState<ApplicationCommandOption>({
     key: `${ApplicationCommandOptionType[type]}Option-${index}`,
     type,
@@ -25,7 +37,10 @@ function Option({ type, index }: OptionProps) {
   });
   const [command, setCommand] = useRecoilState(commandState);
   useEffect(() => {
-    if (command.options) {
+    if (inSubCommand && updater) {
+      updater(option);
+    }
+    if (!inSubCommand && command.options) {
       setCommand({
         ...command,
         options: [
@@ -50,15 +65,18 @@ function Option({ type, index }: OptionProps) {
   );
 
   function deleteOption() {
-    if (command.options) {
+    if (inSubCommand && deleter) {
+      deleter(option.key ?? '');
+    }
+    if (!inSubCommand && command.options) {
       setCommand({
         ...command,
         options: command.options.filter((o) => o.key !== option.key),
       });
+      setOptionElements(
+        optionElements.filter((elem: any) => elem.key !== option.key),
+      );
     }
-    setOptionElements(
-      optionElements.filter((elem: any) => elem.key !== option.key),
-    );
   }
 
   return (
@@ -72,6 +90,7 @@ function Option({ type, index }: OptionProps) {
         </>
       }
       bordered={false}
+      style={inSubCommand ? { marginLeft: offset || '20px' } : {}}
     >
       <Space direction="vertical" style={{ width: '100%' }}>
         <GenericInput name="name" setter={[option, setOption]} />
