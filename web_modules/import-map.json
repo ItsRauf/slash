@@ -2,6 +2,7 @@
   "imports": {
     "@ant-design/icons": "./@ant-design/icons.js",
     "antd": "./antd.js",
+    "antd/dist/antd.css": "./antd/dist/antd.css",
     "antd/dist/antd.dark.css": "./antd/dist/antd.dark.css",
     "react": "./react.js",
     "react-dom": "./react-dom.js",

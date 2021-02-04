@@ -42,6 +42,20 @@ const RoleSVG = () => /* @__PURE__ */ React.createElement("svg", {
   fill: "currentColor",
   d: "M19,17H11V16C11,14.67 13.67,14 15,14C16.33,14 19,14.67 19,16M15,9A2,2 0 0,1 17,11A2,2 0 0,1 15,13A2,2 0 0,1 13,11C13,9.89 13.9,9 15,9M20,6H12L10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6Z"
 }));
+const SubCommandGroupSVG = () => /* @__PURE__ */ React.createElement("svg", {
+  style: {width: "24px", height: "24px"},
+  viewBox: "0 0 24 24"
+}, /* @__PURE__ */ React.createElement("path", {
+  fill: "currentColor",
+  d: "M4 4C2.89 4 2 4.89 2 6V18A2 2 0 0 0 4 20H20A2 2 0 0 0 22 18V8C22 6.89 21.1 6 20 6H12L10 4H4M12 9H15V11H12V9M16 9H19V11H16V9M12 12H15V14H12V12M16 12H19V14H16V12M12 15H15V17H12V15M16 15H19V17H16V15Z"
+}));
+const SubCommandSVG = () => /* @__PURE__ */ React.createElement("svg", {
+  style: {width: "24px", height: "24px"},
+  viewBox: "0 0 24 24"
+}, /* @__PURE__ */ React.createElement("path", {
+  fill: "currentColor",
+  d: "M3,3H9V7H3V3M15,10H21V14H15V10M15,17H21V21H15V17M13,13H7V18H13V20H7L5,20V9H7V11H13V13Z"
+}));
 const icons2 = {
   String: /* @__PURE__ */ React.createElement(Icon, {
     component: StringSVG
@@ -60,6 +74,12 @@ const icons2 = {
   }),
   Role: /* @__PURE__ */ React.createElement(Icon, {
     component: RoleSVG
+  }),
+  SubCommandGroup: /* @__PURE__ */ React.createElement(Icon, {
+    component: SubCommandGroupSVG
+  }),
+  SubCommand: /* @__PURE__ */ React.createElement(Icon, {
+    component: SubCommandSVG
   })
 };
 export default icons2;

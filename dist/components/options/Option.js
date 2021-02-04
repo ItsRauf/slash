@@ -7,7 +7,14 @@ import {commandState, optionElementState} from "../../recoil/index.js";
 import GenericInput2 from "./GenericInput.js";
 import Icons from "../../icons/index.js";
 import {useRecoilState} from "../../../web_modules/recoil.js";
-function Option({type, index}) {
+function Option({
+  type,
+  index,
+  inSubCommand,
+  offset,
+  deleter,
+  updater
+}) {
   const [option, setOption] = useState({
     key: `${ApplicationCommandOptionType[type]}Option-${index}`,
     type,
@@ -18,7 +25,10 @@ function Option({type, index}) {
   });
   const [command, setCommand] = useRecoilState(commandState);
   useEffect(() => {
-    if (command.options) {
+    if (inSubCommand && updater) {
+      updater(option);
+    }
+    if (!inSubCommand && command.options) {
       setCommand({
         ...command,
         options: [
@@ -38,13 +48,16 @@ function Option({type, index}) {
   }, [_default]);
   const [optionElements, setOptionElements] = useRecoilState(optionElementState);
   function deleteOption() {
-    if (command.options) {
+    if (inSubCommand && deleter) {
+      deleter(option.key ?? "");
+    }
+    if (!inSubCommand && command.options) {
       setCommand({
         ...command,
         options: command.options.filter((o) => o.key !== option.key)
       });
+      setOptionElements(optionElements.filter((elem) => elem.key !== option.key));
     }
-    setOptionElements(optionElements.filter((elem) => elem.key !== option.key));
   }
   return /* @__PURE__ */ React.createElement(Card, {
     title: /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Row, {
@@ -52,7 +65,8 @@ function Option({type, index}) {
       align: "middle",
       justify: "start"
     }, /* @__PURE__ */ React.createElement(Col, null, Icons[ApplicationCommandOptionType[type]]), /* @__PURE__ */ React.createElement(Col, null, ApplicationCommandOptionType[type]))),
-    bordered: false
+    bordered: false,
+    style: inSubCommand ? {marginLeft: offset || "20px"} : {}
   }, /* @__PURE__ */ React.createElement(Space, {
     direction: "vertical",
     style: {width: "100%"}

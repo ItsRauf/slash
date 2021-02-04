@@ -4,6 +4,8 @@ import {commandState, optionElementState} from "../recoil/index.js";
 import {ApplicationCommandOptionType} from "../slash/ApplicationCommand.js";
 import Icons from "../icons/index.js";
 import Option2 from "./options/Option.js";
+import SubCommand2 from "./options/SubCommand.js";
+import SubCommandGroup2 from "./options/SubCommandGroup.js";
 import keyofEnum2 from "../helpers/keyofEnum.js";
 import {useRecoilState} from "../../web_modules/recoil.js";
 function OptionsModal() {
@@ -19,20 +21,48 @@ function OptionsModal() {
   const [command, setCommand] = useRecoilState(commandState);
   function addOptionElement(e) {
     const ts = Date.now();
-    setOptionElements([
-      ...optionElements,
-      /* @__PURE__ */ React.createElement(Option2, {
-        key: `${ApplicationCommandOptionType[parseInt(e.currentTarget.id)]}Option-${ts}`,
-        type: parseInt(e.currentTarget.id),
-        index: ts
-      })
-    ]);
+    const optionType = parseInt(e.currentTarget.id);
+    switch (optionType) {
+      case ApplicationCommandOptionType.SubCommand:
+        setOptionElements([
+          ...optionElements,
+          /* @__PURE__ */ React.createElement(SubCommand2, {
+            key: `${ApplicationCommandOptionType[parseInt(e.currentTarget.id)]}Option-${ts}`,
+            type: parseInt(e.currentTarget.id),
+            index: ts,
+            inGroup: false
+          })
+        ]);
+        break;
+      case ApplicationCommandOptionType.SubCommandGroup:
+        setOptionElements([
+          ...optionElements,
+          /* @__PURE__ */ React.createElement(SubCommandGroup2, {
+            key: `${ApplicationCommandOptionType[parseInt(e.currentTarget.id)]}Option-${ts}`,
+            type: parseInt(e.currentTarget.id),
+            index: ts,
+            inGroup: false
+          })
+        ]);
+        break;
+      default:
+        setOptionElements([
+          ...optionElements,
+          /* @__PURE__ */ React.createElement(Option2, {
+            key: `${ApplicationCommandOptionType[parseInt(e.currentTarget.id)]}Option-${ts}`,
+            type: parseInt(e.currentTarget.id),
+            index: ts
+          })
+        ]);
+        break;
+    }
     if (!command.options) {
       setCommand({...command, options: []});
     }
     setModalVisibility(!modalVisibility);
   }
   const OptionNames = keyofEnum2(ApplicationCommandOptionType);
+  const SubCommandOptions = OptionNames.splice(0, 2);
   return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Button, {
     type: "primary",
     size: "large",
@@ -52,8 +82,9 @@ function OptionsModal() {
     gutter: 16,
     justify: "space-around",
     align: "middle"
-  }, OptionNames.splice(0, 3).map((val) => /* @__PURE__ */ React.createElement(Col, {
-    flex: "auto"
+  }, OptionNames.splice(0, 3).map((val, ind) => /* @__PURE__ */ React.createElement(Col, {
+    flex: "auto",
+    key: ind
   }, /* @__PURE__ */ React.createElement(Button, {
     key: val,
     id: ApplicationCommandOptionType[val],
@@ -67,8 +98,25 @@ function OptionsModal() {
     gutter: 16,
     justify: "space-around",
     align: "middle"
-  }, OptionNames.splice(-3).map((val) => /* @__PURE__ */ React.createElement(Col, {
-    flex: "auto"
+  }, OptionNames.splice(-3).map((val, ind) => /* @__PURE__ */ React.createElement(Col, {
+    flex: "auto",
+    key: ind
+  }, /* @__PURE__ */ React.createElement(Button, {
+    key: val,
+    id: ApplicationCommandOptionType[val],
+    onClick: addOptionElement,
+    size: "large"
+  }, /* @__PURE__ */ React.createElement(Row, {
+    gutter: 8,
+    align: "middle",
+    justify: "space-around"
+  }, /* @__PURE__ */ React.createElement(Col, null, Icons[val]), /* @__PURE__ */ React.createElement(Col, null, val)))))), /* @__PURE__ */ React.createElement(Row, {
+    gutter: 16,
+    justify: "space-around",
+    align: "middle"
+  }, SubCommandOptions.map((val, ind) => /* @__PURE__ */ React.createElement(Col, {
+    flex: "auto",
+    key: ind
   }, /* @__PURE__ */ React.createElement(Button, {
     key: val,
     id: ApplicationCommandOptionType[val],

@@ -6,7 +6,7 @@ import React from "../web_modules/react.js";
 import ValueInput2 from "./components/ValueInput.js";
 import {useRecoilValue} from "../web_modules/recoil.js";
 function Heading() {
-  return /* @__PURE__ */ React.createElement(Layout.Header, null, /* @__PURE__ */ React.createElement("h2", null, "Rauf's Slash Command Generator"));
+  return /* @__PURE__ */ React.createElement(Layout.Header, null, /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("h2", null, "Rauf's Slash Command Generator")));
 }
 function App() {
   return /* @__PURE__ */ React.createElement(Layout, null, /* @__PURE__ */ React.createElement(Heading, null), /* @__PURE__ */ React.createElement(Layout.Content, {
