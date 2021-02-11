@@ -1,13 +1,13 @@
 import {Button, Col, Modal, Row, Space} from "../../web_modules/antd.js";
 import React, {useEffect, useState} from "../../web_modules/react.js";
-import {commandState, optionElementState} from "../recoil/index.js";
+import {commandState, optionElementState, useableOptionType} from "../recoil/index.js";
+import {useRecoilState, useRecoilValue} from "../../web_modules/recoil.js";
 import {ApplicationCommandOptionType} from "../slash/ApplicationCommand.js";
 import Icons from "../icons/index.js";
 import Option2 from "./options/Option.js";
 import SubCommand2 from "./options/SubCommand.js";
 import SubCommandGroup2 from "./options/SubCommandGroup.js";
 import keyofEnum2 from "../helpers/keyofEnum.js";
-import {useRecoilState} from "../../web_modules/recoil.js";
 function OptionsModal() {
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
@@ -63,6 +63,7 @@ function OptionsModal() {
   }
   const OptionNames = keyofEnum2(ApplicationCommandOptionType);
   const SubCommandOptions = OptionNames.splice(0, 2);
+  const useableOption = useRecoilValue(useableOptionType);
   return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Button, {
     type: "primary",
     size: "large",
@@ -89,7 +90,8 @@ function OptionsModal() {
     key: val,
     id: ApplicationCommandOptionType[val],
     onClick: addOptionElement,
-    size: "large"
+    size: "large",
+    disabled: useableOption ? !(useableOption === "Option") : false
   }, /* @__PURE__ */ React.createElement(Row, {
     gutter: 8,
     align: "middle",
@@ -105,7 +107,8 @@ function OptionsModal() {
     key: val,
     id: ApplicationCommandOptionType[val],
     onClick: addOptionElement,
-    size: "large"
+    size: "large",
+    disabled: useableOption ? !(useableOption === "Option") : false
   }, /* @__PURE__ */ React.createElement(Row, {
     gutter: 8,
     align: "middle",
@@ -121,7 +124,8 @@ function OptionsModal() {
     key: val,
     id: ApplicationCommandOptionType[val],
     onClick: addOptionElement,
-    size: "large"
+    size: "large",
+    disabled: useableOption ? !(useableOption === val) : false
   }, /* @__PURE__ */ React.createElement(Row, {
     gutter: 8,
     align: "middle",
