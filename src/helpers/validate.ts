@@ -5,8 +5,7 @@ export interface ValidationState {
 
 export default function validate(
   propName: string,
-  value: string,
-  nameMinLength: number,
+  value: string
 ): [boolean, ValidationState] {
   const validation: ValidationState = {
     status: '',
@@ -14,9 +13,9 @@ export default function validate(
 
   switch (propName) {
     case 'name':
-      if (value.length < nameMinLength) {
+      if (value.length < 1) {
         validation.status = 'error';
-        validation.message = `Name can not be shorter than ${nameMinLength} characters.`;
+        validation.message = `Name can not be shorter than 1 character.`;
         return [true, validation];
       } else if (value.length > 32) {
         validation.status = 'error';

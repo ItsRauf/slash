@@ -28,7 +28,7 @@ function GenericInput({ name, setter }: GenericInputProps) {
   });
 
   function updateValue(e: React.ChangeEvent<HTMLInputElement>) {
-    const [isValid, validationData] = validate(name, e.target.value, 1);
+    const [isValid, validationData] = validate(name, e.target.value);
     setValidation(validationData);
     if (isValid) {
       setValue(e.target.value);
