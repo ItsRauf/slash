@@ -17,7 +17,6 @@ function ValueInput({ keyName }: ValueInputProps) {
     const [isValid, validationData] = validate(
       keyName as string,
       e.target.value,
-      3,
     );
     setValidation(validationData);
     if (isValid) {
