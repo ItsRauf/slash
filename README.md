@@ -1,4 +1,4 @@
-# New Project
+# Slash Command Generator
 
 > ✨ Bootstrapped with Create Snowpack App (CSA).
 
