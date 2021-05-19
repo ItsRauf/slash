@@ -30,10 +30,6 @@ export default function validate(
         validation.status = 'error';
         validation.message = `Name must be lowercase.`;
         return [true, validation];
-      } else if (Array.from(value.matchAll(/\d+/g)).length > 0) {
-        validation.status = 'error';
-        validation.message = `Name can not include numbers.`;
-        return [true, validation];
       } else {
         validation.status = 'success';
         return [true, validation];
