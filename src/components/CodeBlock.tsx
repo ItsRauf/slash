@@ -1,4 +1,8 @@
-import { Button, Card, Skeleton, Row, Col, Alert } from 'antd';
+import Button from 'antd/es/button';
+import Card from 'antd/es/card';
+import Skeleton from 'antd/es/skeleton';
+import Row from 'antd/es/row';
+import Col from 'antd/es/col';
 import React, { useEffect, useState, useRef } from 'react';
 
 interface CodeBlockProps {

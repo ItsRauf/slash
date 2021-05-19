@@ -1,6 +1,6 @@
-//import './App.scss';
-
-import { Card, Layout, Space } from 'antd';
+import Card from 'antd/es/card';
+import Layout from 'antd/es/layout';
+import Space from 'antd/es/space';
 import { finalCommandState, finalOptionElementState } from './recoil';
 
 import CodeBlock from './components/CodeBlock';
@@ -9,14 +9,11 @@ import React from 'react';
 import ValueInput from './components/ValueInput';
 import { useRecoilValue } from 'recoil';
 
-
 function Heading() {
   return (
     <Layout.Header>
       <>
-        <h2>
-          Rauf's Slash Command Generator
-        </h2>
+        <h2>Rauf's Slash Command Generator</h2>
       </>
     </Layout.Header>
   );

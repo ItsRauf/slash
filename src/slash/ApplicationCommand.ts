@@ -7,6 +7,7 @@ export enum ApplicationCommandOptionType {
   User,
   Channel,
   Role,
+  Mentionable,
 }
 
 export interface ApplicationCommandOptionChoice {
@@ -19,7 +20,6 @@ export interface ApplicationCommandOption {
   type: ApplicationCommandOptionType;
   name: string;
   description: string;
-  default?: boolean;
   required?: boolean;
   choices?: ApplicationCommandOptionChoice[];
   options?: ApplicationCommandOption[];

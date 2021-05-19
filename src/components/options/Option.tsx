@@ -2,7 +2,14 @@ import {
   ApplicationCommandOption,
   ApplicationCommandOptionType,
 } from '../../slash/ApplicationCommand';
-import { Button, Card, Col, Row, Space, Switch, Typography } from 'antd';
+// import { Button, Card, Col, Row, Space, Switch, Typography } from 'antd';
+import Button from 'antd/es/button';
+import Space from 'antd/es/space';
+import Row from 'antd/es/row';
+import Col from 'antd/es/col';
+import Card from 'antd/es/card';
+import Switch from 'antd/es/switch';
+import Typography from 'antd/es/typography';
 import React, { useEffect, useState } from 'react';
 import { commandState, optionElementState } from '../../recoil';
 
@@ -32,7 +39,6 @@ function Option({
     type,
     name: '',
     description: '',
-    default: false,
     required: false,
   });
   const [command, setCommand] = useRecoilState(commandState);
@@ -55,14 +61,9 @@ function Option({
   useEffect(() => {
     setOption({ ...option, required: required });
   }, [required]);
-  const [_default, setDefault] = useState(false);
-  useEffect(() => {
-    setOption({ ...option, default: _default });
-  }, [_default]);
 
-  const [optionElements, setOptionElements] = useRecoilState(
-    optionElementState,
-  );
+  const [optionElements, setOptionElements] =
+    useRecoilState(optionElementState);
 
   function deleteOption() {
     if (inSubCommand && deleter) {
@@ -101,13 +102,6 @@ function Option({
             <Switch
               checked={required}
               onChange={(checked) => setRequired(checked)}
-            />
-          </Col>
-          <Col span={6}>
-            <Typography.Title level={5}>Default?</Typography.Title>
-            <Switch
-              checked={_default}
-              onChange={(checked) => setDefault(checked)}
             />
           </Col>
           <Col flex="auto">

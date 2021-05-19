@@ -1,4 +1,7 @@
-import { Form, Input, Typography } from 'antd';
+// import { Form, Input, Typography } from 'antd';
+import Form from 'antd/es/form';
+import Input from 'antd/es/input';
+import Typography from 'antd/es/typography';
 import React, { useState } from 'react';
 import validate, { ValidationState } from '../helpers/validate';
 

@@ -2,7 +2,12 @@ import {
   ApplicationCommandOption,
   ApplicationCommandOptionType,
 } from '../../slash/ApplicationCommand';
-import { Button, Card, Col, Row, Space, Switch, Typography } from 'antd';
+// import { Button, Card, Col, Row, Space, Switch, Typography } from 'antd';
+import Button from 'antd/es/button';
+import Space from 'antd/es/space';
+import Row from 'antd/es/row';
+import Col from 'antd/es/col';
+import Card from 'antd/es/card';
 import React, { ReactNode, useEffect, useState } from 'react';
 import { commandState, optionElementState } from '../../recoil';
 
@@ -44,9 +49,8 @@ function SubCommandGroup({ type, index }: SubCommandGroupProps) {
     }
   }, [option]);
 
-  const [optionElements, setOptionElements] = useRecoilState(
-    optionElementState,
-  );
+  const [optionElements, setOptionElements] =
+    useRecoilState(optionElementState);
 
   function deleteOption() {
     if (command.options) {
@@ -151,7 +155,7 @@ function SubCommandGroup({ type, index }: SubCommandGroupProps) {
                       key={val}
                       id={
                         ApplicationCommandOptionType[
-                          (val as unknown) as ApplicationCommandOptionType
+                          val as unknown as ApplicationCommandOptionType
                         ]
                       }
                       onClick={addChildOption}

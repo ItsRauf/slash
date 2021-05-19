@@ -1,4 +1,8 @@
-import { Button, Col, Modal, Row, Space } from 'antd';
+import Button from 'antd/es/button';
+import Space from 'antd/es/space';
+import Row from 'antd/es/row';
+import Col from 'antd/es/col';
+import Modal from 'antd/es/modal';
 import React, { useEffect, useState } from 'react';
 import { commandState, optionElementState, useableOptionType } from '../recoil';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -21,9 +25,8 @@ function OptionsModal() {
     setModalVisibility(!modalVisibility);
   }
 
-  const [optionElements, setOptionElements] = useRecoilState(
-    optionElementState,
-  );
+  const [optionElements, setOptionElements] =
+    useRecoilState(optionElementState);
   const [command, setCommand] = useRecoilState(commandState);
   function addOptionElement(e: React.MouseEvent<HTMLElement, MouseEvent>) {
     const ts = Date.now();
@@ -100,14 +103,14 @@ function OptionsModal() {
         footer={null}
       >
         <Space size={24} direction="vertical" style={{ width: '100%' }}>
-          <Row gutter={16} justify="space-around" align="middle">
-            {OptionNames.splice(0, 3).map((val, ind) => (
+          <Row gutter={12} justify="space-around" align="middle">
+            {OptionNames.splice(0, 4).map((val, ind) => (
               <Col flex="auto" key={ind}>
                 <Button
                   key={val}
                   id={
                     ApplicationCommandOptionType[
-                      (val as unknown) as ApplicationCommandOptionType
+                      val as unknown as ApplicationCommandOptionType
                     ]
                   }
                   onClick={addOptionElement}
@@ -116,7 +119,7 @@ function OptionsModal() {
                     useableOption ? !(useableOption === 'Option') : false
                   }
                 >
-                  <Row gutter={8} align="middle" justify="space-around">
+                  <Row gutter={6} align="middle" justify="space-around">
                     <Col>{Icons[val]}</Col>
                     <Col>{val}</Col>
                   </Row>
@@ -124,14 +127,14 @@ function OptionsModal() {
               </Col>
             ))}
           </Row>
-          <Row gutter={16} justify="space-around" align="middle">
-            {OptionNames.splice(-3).map((val, ind) => (
+          <Row gutter={12} justify="space-around" align="middle">
+            {OptionNames.map((val, ind) => (
               <Col flex="auto" key={ind}>
                 <Button
                   key={val}
                   id={
                     ApplicationCommandOptionType[
-                      (val as unknown) as ApplicationCommandOptionType
+                      val as unknown as ApplicationCommandOptionType
                     ]
                   }
                   onClick={addOptionElement}
@@ -140,7 +143,7 @@ function OptionsModal() {
                     useableOption ? !(useableOption === 'Option') : false
                   }
                 >
-                  <Row gutter={8} align="middle" justify="space-around">
+                  <Row gutter={6} align="middle" justify="space-around">
                     <Col>{Icons[val]}</Col>
                     <Col>{val}</Col>
                   </Row>
@@ -148,21 +151,21 @@ function OptionsModal() {
               </Col>
             ))}
           </Row>
-          <Row gutter={16} justify="space-around" align="middle">
+          <Row gutter={12} justify="space-around" align="middle">
             {SubCommandOptions.map((val, ind) => (
               <Col flex="auto" key={ind}>
                 <Button
                   key={val}
                   id={
                     ApplicationCommandOptionType[
-                      (val as unknown) as ApplicationCommandOptionType
+                      val as unknown as ApplicationCommandOptionType
                     ]
                   }
                   onClick={addOptionElement}
                   size="large"
                   disabled={useableOption ? !(useableOption === val) : false}
                 >
-                  <Row gutter={8} align="middle" justify="space-around">
+                  <Row gutter={6} align="middle" justify="space-around">
                     <Col>{Icons[val]}</Col>
                     <Col>{val}</Col>
                   </Row>

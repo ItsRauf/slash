@@ -10,24 +10,35 @@ module.exports = {
     '@snowpack/plugin-typescript',
     '@snowpack/plugin-sass',
   ],
-  install: [
-    /* ... */
-  ],
-  installOptions: {
-    /* ... */
+  optimize: {
+    minify: true,
+    target: 'es2020',
     treeshake: true,
-  },
-  devOptions: {
-    /* ... */
   },
   buildOptions: {
     /* ... */
     baseUrl: '/slash',
   },
-  proxy: {
-    /* ... */
-  },
-  alias: {
-    /* ... */
+  packageOptions: {
+    knownEntrypoints: [
+      'react',
+      'react-dom',
+      'recoil',
+      'antd/dist/antd.css',
+      'antd/dist/antd.dark.css',
+      'antd/es/card',
+      'antd/es/layout',
+      'antd/es/space',
+      'antd/es/button',
+      'antd/es/skeleton',
+      'antd/es/row',
+      'antd/es/col',
+      'antd/es/modal',
+      'antd/es/form',
+      'antd/es/input',
+      'antd/es/typography',
+      'antd/es/switch',
+      '@ant-design/icons/lib/components/Icon',
+    ],
   },
 };
