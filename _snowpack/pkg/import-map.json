@@ -1,0 +1,22 @@
+{
+  "imports": {
+    "@ant-design/icons/lib/components/Icon": "./@ant-design/icons/lib/components/Icon.js",
+    "antd/dist/antd.css": "./antd/dist/antd.css",
+    "antd/dist/antd.dark.css": "./antd/dist/antd.dark.css",
+    "antd/es/button": "./antd/es/button.js",
+    "antd/es/card": "./antd/es/card.js",
+    "antd/es/col": "./antd/es/col.js",
+    "antd/es/form": "./antd/es/form.js",
+    "antd/es/input": "./antd/es/input.js",
+    "antd/es/layout": "./antd/es/layout.js",
+    "antd/es/modal": "./antd/es/modal.js",
+    "antd/es/row": "./antd/es/row.js",
+    "antd/es/skeleton": "./antd/es/skeleton.js",
+    "antd/es/space": "./antd/es/space.js",
+    "antd/es/switch": "./antd/es/switch.js",
+    "antd/es/typography": "./antd/es/typography.js",
+    "react": "./react.js",
+    "react-dom": "./react-dom.js",
+    "recoil": "./recoil.js"
+  }
+}

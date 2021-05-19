@@ -1,3 +1,1 @@
-export default function keyofEnum(_enum) {
-  return Object.keys(_enum).filter((x) => !(parseInt(x) >= 0));
-}
+export default function n(e){return Object.keys(e).filter(t=>!(parseInt(t)>=0))}

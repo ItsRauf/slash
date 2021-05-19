@@ -1,0 +1,1 @@
+var a=function(){for(var t=arguments.length,u=new Array(t),r=0;r<t;r++)u[r]=arguments[r];return u},e=function(){for(var t=arguments.length,u=new Array(t),r=0;r<t;r++)u[r]=arguments[r];return u};export{e as a,a as t};
