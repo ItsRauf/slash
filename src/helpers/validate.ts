@@ -16,7 +16,7 @@ export default function validate(
     case 'name':
       if (value.length < nameMinLength) {
         validation.status = 'error';
-        validation.message = `Name can not be shorter than ${nameMinLength} characters.`;
+        validation.message = `Name must be at least ${nameMinLength} character.`;
         return [true, validation];
       } else if (value.length > 32) {
         validation.status = 'error';
@@ -25,6 +25,14 @@ export default function validate(
       } else if (value.includes(' ')) {
         validation.status = 'error';
         validation.message = `Name can not include spaces.`;
+        return [true, validation];
+      } else if (value.toLowerCase() !== value) {
+        validation.status = 'error';
+        validation.message = `Name must be lowercase.`;
+        return [true, validation];
+      } else if (Array.from(value.matchAll(/\d+/g)).length > 0) {
+        validation.status = 'error';
+        validation.message = `Name can not include numbers.`;
         return [true, validation];
       } else {
         validation.status = 'success';
@@ -35,7 +43,7 @@ export default function validate(
     case 'description':
       if (value.length < 1) {
         validation.status = 'error';
-        validation.message = `Description can not be shorter than 1 character.`;
+        validation.message = `Description must be at least 1 character.`;
         return [true, validation];
       } else if (value.length > 100) {
         validation.status = 'error';

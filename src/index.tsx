@@ -11,8 +11,6 @@ async function _themeLoad() {
   await import('antd/dist/antd.dark.css');
 }
 
-//import './index.css';
-
 const themes = {
   light: '%PUBLIC_URL%web_modules/antd/dist/antd.css',
   dark: '%PUBLIC_URL%web_modules/antd/dist/antd.dark.css',
