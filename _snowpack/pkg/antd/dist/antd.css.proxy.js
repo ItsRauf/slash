@@ -15243,13 +15243,13 @@ _:-ms-fullscreen .ant-picker-range-wrapper .ant-picker-year-panel .ant-picker-ce
   left: -25px;
 }
 .ant-carousel .slick-prev::before {
-  content: '\u2190';
+  content: '←';
 }
 .ant-carousel .slick-next {
   right: -25px;
 }
 .ant-carousel .slick-next::before {
-  content: '\u2192';
+  content: '→';
 }
 .ant-carousel .slick-dots {
   position: absolute;
@@ -15364,14 +15364,14 @@ _:-ms-fullscreen .ant-picker-range-wrapper .ant-picker-year-panel .ant-picker-ce
   left: auto;
 }
 .ant-carousel-rtl .ant-carousel .slick-prev::before {
-  content: '\u2192';
+  content: '→';
 }
 .ant-carousel-rtl .ant-carousel .slick-next {
   right: auto;
   left: -25px;
 }
 .ant-carousel-rtl .ant-carousel .slick-next::before {
-  content: '\u2190';
+  content: '←';
 }
 .ant-carousel-rtl.ant-carousel .slick-dots {
   flex-direction: row-reverse;
