@@ -11,6 +11,7 @@ export enum ApplicationCommandOptionType {
 }
 
 export interface ApplicationCommandOptionChoice {
+  key?: string;
   name: string;
   value: string | number;
 }

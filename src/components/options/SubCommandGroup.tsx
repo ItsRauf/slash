@@ -23,7 +23,7 @@ interface SubCommandGroupProps {
   inGroup: boolean;
 }
 function SubCommandGroup({ type, index }: SubCommandGroupProps) {
-  const [option, setOption] = useState<ApplicationCommandOption>({
+  const [option, setOption] = useState<Partial<ApplicationCommandOption>>({
     key: `${ApplicationCommandOptionType[type]}Option-${index}`,
     type,
     name: '',
@@ -38,7 +38,7 @@ function SubCommandGroup({ type, index }: SubCommandGroupProps) {
         options: [
           ...command.options.filter((o) => o.key !== option.key),
           {
-            ...option,
+            ...(option as ApplicationCommandOption),
             options: option.options?.map((o) => ({
               ...o,
               key: undefined,
@@ -68,7 +68,7 @@ function SubCommandGroup({ type, index }: SubCommandGroupProps) {
     [],
   );
 
-  function updateChildOption(val: ApplicationCommandOption) {
+  function updateChildOption(val: Partial<ApplicationCommandOption>) {
     setOption((prev) => ({
       ...prev,
       options: [
@@ -76,7 +76,7 @@ function SubCommandGroup({ type, index }: SubCommandGroupProps) {
           // console.log(o, val, o.key !== val.key);
           return o.key !== val.key;
         }),
-        val,
+        val as ApplicationCommandOption,
       ],
     }));
   }

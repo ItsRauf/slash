@@ -23,7 +23,7 @@ interface SubCommandProps {
   inGroup: boolean;
   offset?: number;
   deleter?: (key: string) => void;
-  updater?: (val: ApplicationCommandOption) => void;
+  updater?: (val: Partial<ApplicationCommandOption>) => void;
   className?: string;
 }
 function SubCommand({
@@ -34,7 +34,7 @@ function SubCommand({
   deleter,
   updater,
 }: SubCommandProps) {
-  const [option, setOption] = useState<ApplicationCommandOption>({
+  const [option, setOption] = useState<Partial<ApplicationCommandOption>>({
     key: `${ApplicationCommandOptionType[type]}Option-${index}`,
     type,
     name: '',
@@ -59,7 +59,7 @@ function SubCommand({
         options: [
           ...command.options.filter((o) => o.key !== option.key),
           {
-            ...option,
+            ...(option as ApplicationCommandOption),
             options: option.options?.map((o) => ({
               ...o,
               key: undefined,
@@ -92,7 +92,7 @@ function SubCommand({
     [],
   );
 
-  function updateChildOption(val: ApplicationCommandOption) {
+  function updateChildOption(val: Partial<ApplicationCommandOption>) {
     setOption((prev) => ({
       ...prev,
       options: [
@@ -100,7 +100,7 @@ function SubCommand({
           // console.log(o, val, o.key !== val.key);
           return o.key !== val.key;
         }),
-        val,
+        val as ApplicationCommandOption,
       ],
     }));
   }

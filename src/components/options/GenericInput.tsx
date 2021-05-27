@@ -4,7 +4,10 @@ import Input from 'antd/es/input';
 import Typography from 'antd/es/typography';
 import React, { useEffect, useState } from 'react';
 
-import type { ApplicationCommandOption } from '../../slash/ApplicationCommand';
+import type {
+  ApplicationCommandOption,
+  ApplicationCommandOptionChoice,
+} from '../../slash/ApplicationCommand';
 import validate from '../../helpers/validate';
 
 interface ValidationState {
@@ -12,12 +15,11 @@ interface ValidationState {
   message?: string;
 }
 
-interface GenericInputProps {
+interface GenericInputProps<
+  T = ApplicationCommandOption & ApplicationCommandOptionChoice,
+> {
   name: string;
-  setter: [
-    ApplicationCommandOption,
-    React.Dispatch<React.SetStateAction<ApplicationCommandOption>>,
-  ];
+  setter: [Partial<T>, React.Dispatch<React.SetStateAction<Partial<T>>>];
 }
 function GenericInput({ name, setter }: GenericInputProps) {
   const [value, setValue] = useState('');

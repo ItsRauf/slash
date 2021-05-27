@@ -51,6 +51,11 @@ export default function validate(
       }
       break;
 
+    case 'value':
+      validation.status = 'success';
+      return [true, validation];
+      break;
+
     default:
       validation.status = 'validating';
       return [true, validation];

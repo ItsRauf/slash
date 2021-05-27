@@ -19,6 +19,10 @@ export const finalCommandState = selector({
     if (command.options) {
       command.options = command.options.map((opt) => ({
         ...opt,
+        choices:
+          opt.choices && opt.choices?.length > 0
+            ? opt.choices.map((o) => ({ ...o, key: undefined }))
+            : undefined,
         key: undefined,
       }));
       if (command.options.length === 0) command.options = undefined;
