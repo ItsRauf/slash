@@ -1,1 +1,16 @@
-import*as e from"../_snowpack/env.js";import.meta.env=e;import"../_snowpack/pkg/antd/dist/antd.dark.css.proxy.js";import o from"./App.js";import t from"../_snowpack/pkg/react.js";import a from"../_snowpack/pkg/react-dom.js";import{RecoilRoot as n}from"../_snowpack/pkg/recoil.js";async function m(){await import("../_snowpack/pkg/antd/dist/antd.css.proxy.js"),await import("../_snowpack/pkg/antd/dist/antd.dark.css.proxy.js")}const i={light:"%PUBLIC_URL%web_modules/antd/dist/antd.css",dark:"%PUBLIC_URL%web_modules/antd/dist/antd.dark.css"};a.render(t.createElement(t.StrictMode,null,t.createElement(n,null,t.createElement(o,null))),document.getElementById("root"));
+import * as __SNOWPACK_ENV__ from '../_snowpack/env.js';
+import.meta.env = __SNOWPACK_ENV__;
+
+import React from "../_snowpack/pkg/react.js";
+import ReactDOM from "../_snowpack/pkg/react-dom.js";
+import App from "./App.js";
+import {ChakraProvider, ColorModeScript} from "../_snowpack/pkg/@chakra-ui/react.js";
+import {theme} from "./theme.js";
+ReactDOM.render(/* @__PURE__ */ React.createElement(React.StrictMode, null, /* @__PURE__ */ React.createElement(ColorModeScript, {
+  initialColorMode: theme.config.initialColorMode
+}), /* @__PURE__ */ React.createElement(ChakraProvider, {
+  theme
+}, /* @__PURE__ */ React.createElement(App, null))), document.getElementById("root"));
+if (undefined /* [snowpack] import.meta.hot */ ) {
+  undefined /* [snowpack] import.meta.hot */ .accept();
+}

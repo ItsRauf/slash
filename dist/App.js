@@ -1,1 +1,41 @@
-import r from"../_snowpack/pkg/antd/es/card.js";import t from"../_snowpack/pkg/antd/es/layout.js";import n from"../_snowpack/pkg/antd/es/space.js";import{finalCommandState as l,finalOptionElementState as m}from"./recoil/index.js";import c from"./components/CodeBlock.js";import i from"./components/OptionsModal.js";import e from"../_snowpack/pkg/react.js";import a from"./components/ValueInput.js";import{useRecoilValue as o}from"../_snowpack/pkg/recoil.js";function p(){return e.createElement(t.Header,null,e.createElement(e.Fragment,null,e.createElement("h2",null,"Rauf's Slash Command Generator")))}function s(){return e.createElement(t,null,e.createElement(p,null),e.createElement(t.Content,{style:{padding:"10px"}},e.createElement(n,{direction:"vertical",style:{width:"100%"},size:24},e.createElement(n,{direction:"vertical",style:{width:"100%"}},e.createElement(r,{bordered:!1},e.createElement(n,{direction:"vertical",style:{width:"100%"}},e.createElement(a,{keyName:"name"}),e.createElement(a,{keyName:"description"}))),o(m),e.createElement(i,null)),e.createElement(c,{code:o(l)}))))}export default s;
+import React, {useState, useEffect} from "../_snowpack/pkg/react.js";
+import {Flex, Heading, Spacer, VStack} from "../_snowpack/pkg/@chakra-ui/react.js";
+import ThemeToggle from "./helpers/toggleTheme.js";
+import {useCommandStore, useOptionElementStore} from "./state.js";
+import BaseInput from "./options/BaseInput.js";
+import AddOption from "./options/addOption.js";
+import CodeBlock from "./helpers/CodeBlock.js";
+function App() {
+  const optionElements = useOptionElementStore((state) => state.elements);
+  const commandStore = useCommandStore();
+  const getCleanedCommandJSON = useCommandStore((state) => state.getCleanedCommandJSON);
+  const [output, setOutput] = useState(getCleanedCommandJSON());
+  const update = useCommandStore((state) => state.update);
+  useEffect(() => {
+    setOutput(getCleanedCommandJSON());
+  }, [commandStore]);
+  return /* @__PURE__ */ React.createElement(VStack, {
+    px: "8"
+  }, /* @__PURE__ */ React.createElement(Flex, {
+    w: "full",
+    py: "4"
+  }, /* @__PURE__ */ React.createElement(Heading, {
+    as: "h3",
+    size: "lg"
+  }, "Rauf's Slash Command Generator"), /* @__PURE__ */ React.createElement(Spacer, null), /* @__PURE__ */ React.createElement(ThemeToggle, null)), /* @__PURE__ */ React.createElement(Flex, {
+    direction: "column",
+    w: "full",
+    h: "full"
+  }, /* @__PURE__ */ React.createElement(BaseInput, {
+    title: "Name",
+    placeholder: "Command Name",
+    setter: (val) => update("name", val)
+  }), /* @__PURE__ */ React.createElement(BaseInput, {
+    title: "Description",
+    placeholder: "Command Description",
+    setter: (val) => update("description", val)
+  }), /* @__PURE__ */ React.createElement(AddOption, null), /* @__PURE__ */ React.createElement(Spacer, null), optionElements, /* @__PURE__ */ React.createElement(Spacer, null), /* @__PURE__ */ React.createElement(CodeBlock, {
+    code: output
+  })));
+}
+export default App;
