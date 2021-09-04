@@ -1,40 +1,50 @@
 import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Flex, Heading, Spacer, VStack } from '@chakra-ui/react';
+import ThemeToggle from './helpers/toggleTheme';
+import { useCommandStore, useOptionElementStore } from './state';
+import BaseInput from './options/BaseInput';
+import AddOption from './options/addOption';
+import CodeBlock from './helpers/CodeBlock';
 
-interface AppProps {}
-
-function App({}: AppProps) {
-  // Create the count state.
-  const [count, setCount] = useState(0);
-  // Create the counter (+1 every second).
+function App() {
+  const optionElements = useOptionElementStore((state) => state.elements);
+  const commandStore = useCommandStore();
+  const getCleanedCommandJSON = useCommandStore(
+    (state) => state.getCleanedCommandJSON,
+  );
+  const [output, setOutput] = useState(getCleanedCommandJSON());
+  const update = useCommandStore((state) => state.update);
   useEffect(() => {
-    const timer = setTimeout(() => setCount(count + 1), 1000);
-    return () => clearTimeout(timer);
-  }, [count, setCount]);
-  // Return the App component.
+    setOutput(getCleanedCommandJSON());
+  }, [commandStore]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <p>
-          Page has been open for <code>{count}</code> seconds.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </p>
-      </header>
-    </div>
+    <VStack px="8">
+      <Flex w="full" py="4">
+        <Heading as="h3" size="lg">
+          Rauf's Slash Command Generator
+        </Heading>
+        <Spacer />
+        <ThemeToggle />
+      </Flex>
+      <Flex direction="column" w="full" h="full">
+        <BaseInput
+          title="Name"
+          placeholder="Command Name"
+          setter={(val) => update('name', val)}
+        />
+        <BaseInput
+          title="Description"
+          placeholder="Command Description"
+          setter={(val) => update('description', val)}
+        />
+        <AddOption />
+        <Spacer />
+        {optionElements}
+        <Spacer />
+        <CodeBlock code={output} />
+      </Flex>
+    </VStack>
   );
 }
 
