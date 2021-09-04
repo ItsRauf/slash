@@ -4,7 +4,8 @@
     "build": "snowpack build",
     "test": "web-test-runner \"src/**/*.test.tsx\"",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
-    "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\""
+    "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\"",
+    "deploy": "gh-pages -d build -r https://github.com/ItsRauf/slash.git"
   },
   "dependencies": {
     "@chakra-ui/icons": "^1.0.15",
@@ -31,6 +32,7 @@
     "@types/snowpack-env": "^2.3.3",
     "@web/test-runner": "^0.13.3",
     "chai": "^4.3.4",
+    "gh-pages": "^3.2.3",
     "prettier": "^2.2.1",
     "snowpack": "^3.3.7",
     "typescript": "^4.2.4"
