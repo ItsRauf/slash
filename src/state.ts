@@ -3,15 +3,16 @@ import create from 'zustand';
 
 export enum ApplicationCommandOptionType {
   SubCommand = 1,
-  SubCommandGroup,
-  String,
-  Integer,
-  Boolean,
-  User,
-  Channel,
-  Role,
-  Mentionable,
-  Number,
+  SubCommandGroup = 2,
+  String = 3,
+  Integer = 4,
+  Boolean = 5,
+  User = 6,
+  Channel = 7,
+  Role = 8,
+  Mentionable = 9,
+  Number = 10,
+  Attachment = 11,
 }
 
 export interface ApplicationCommandOptionChoice {
@@ -28,6 +29,7 @@ export interface ApplicationCommandOption {
   required?: boolean;
   choices?: ApplicationCommandOptionChoice[];
   options?: ApplicationCommandOption[];
+  autocomplete?: boolean;
 }
 
 export interface ApplicationCommand {
