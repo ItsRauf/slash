@@ -148,6 +148,19 @@ function OptionBlock({ type, _key, inSubCommand, setters }: OptionBlockProps) {
             >
               Required
             </Checkbox>
+            {['String', 'Integer', 'Number'].indexOf(type) != -1 && (
+              <Checkbox
+                size="lg"
+                colorScheme="blue"
+                onChange={(e) =>
+                  updateLocalOption({
+                    autocomplete: e.target.checked ? true : undefined,
+                  })
+                }
+              >
+                Autocomplete
+              </Checkbox>
+            )}
             <Button mx="1" mt="4" w="32" colorScheme="blue" onClick={addChoice}>
               Add Choice
             </Button>

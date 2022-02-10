@@ -123,6 +123,17 @@ export const Choice = createIcon({
   ),
 });
 
+export const Attachment = createIcon({
+  displayName: 'Attachment',
+  viewBox: '0 0 24 24',
+  path: (
+    <path
+      fill="currentColor"
+      d="M9 16h6v-6h4l-7-7-7 7h4v6zm-4 2h14v2H5v-2z"
+    />
+  ),
+});
+
 export default {
   String,
   Integer,
@@ -135,6 +146,7 @@ export default {
   SubCommandGroup,
   SubCommand,
   Choice,
+  Attachment,
 } as {
   [key in keyof typeof ApplicationCommandOptionType]: ReturnType<
     typeof createIcon
